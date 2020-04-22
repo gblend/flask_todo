@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Task</title>
+{% endblock %}
+
+
+{% block body %}
+<!-- Navbar begin -->
+<div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+            <ul style="list-style-type: none;">
+                <li class="li"><a href="/" style="text-decoration: none;" class="text-muted">All Task</a></li>
+                <li class="li"><a href="/create" style="text-decoration: none;" class="text-white">Create Task</a></li>
+            </ul>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</div>
+<!-- Navbar end -->
+
+<div class="container row">
+    <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 offset-md-2 offset-lg-2">
+        <br>
+        <h2 class="text-center">Add Task</h2><br>
+    </div>
+</div><br>
+<div class="form-group row">
+    <div class="col-md-6 col-lg-6 col-sm-12 offset-md-3 offset-lg-3">
+        <!-- Error message -->
+        {% for category, message in get_flashed_messages(with_categories = true) %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- Success message -->
+        {% for category, message in get_flashed_messages(with_categories = true) %}
+        {% if category == 'success' %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <form action="/create" method="POST" style="padding: 10px;">
+            <div class="form-group">
+                <label for="content">Enter task description</label><br>
+                <textarea name="content" id="content" cols="40" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm"><span class="badge badge-light"><i
+                        class="fa fa-save"></i></span> Task</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-12 offset-md-3 offset-lg-3">
+        <a class="btn btn-primary btn-sm fa-pull-right" href="/" class="text-decoration-none"><span
+                class="badge badge-light"><i class="fa fa-eye"></i></span> Todo</a>
+    </div>
+</div><br>
+{% endblock %}
