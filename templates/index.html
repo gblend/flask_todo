@@ -25,61 +25,64 @@
 </div>
 <!-- Navbar end -->
 
-<div class="container row">
-    <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 offset-md-2 offset-lg-2">
-        <br>
-        <h2 class="text-center">All Tasks</h2><br>
-        {% if tasks|length < 1 %}
-        <h4>You have no tasks yet. Start adding some!</h4><br>
-        {% else %}
-        <!-- Error message -->
-        {% for category, message in get_flashed_messages(with_categories = true) %}
-        {% if category == 'error' %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-        {% endif %}
-        {% endfor %}
-        <!-- Success message -->
-        {% for category, message in get_flashed_messages(with_categories = true) %}
-        {% if category == 'success' %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-        {% endif %}
-        {% endfor %}
-        <br>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Task</th>
-                    <th scope="col">Added</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                <tr>
-                    <td>{{ task.content }}</td>
-                    <td>{{ task.date_created.date() }}</td>
-                    <td>
-                        <a href="/delete/{{task.id}}"
-                            onclick="return confirm('Are you sure you want to delete this task?')"><i
-                                class="fa fa-trash text-danger"></i></a>
-                        &nbsp;
-                        <a href="/update/{{task.id}}"><i class="fa fa-edit"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 offset-md-1 offset-lg-1">
+            <br>
+            <h2 class="text-center">All Tasks</h2><br>
+            {% if tasks|length < 1 %}
+            <h4>You have no tasks yet. Start adding some!</h4><br>
+            {% else %}
+            <!-- Error message -->
+            {% for category, message in get_flashed_messages(with_categories = true) %}
+            {% if category == 'error' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <!-- Success message -->
+            {% for category, message in get_flashed_messages(with_categories = true) %}
+            {% if category == 'success' %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Added</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.content }}</td>
+                        <td>{{ task.date_created.date() }}</td>
+                        <td>
+                            <a href="/delete/{{task.id}}"
+                                onclick="return confirm('Are you sure you want to delete this task?')"><i
+                                    class="fa fa-trash text-danger"></i></a>
+                            &nbsp;
+                            <a href="/update/{{task.id}}"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div><br>
     </div><br>
-</div><br>
-<div class="row"><br>
-    <div class="col-md-6 col-lg-6 col-sm-12 offset-md-2 offset-lg-2">
-        <a class="btn btn-primary btn-sm" href="/create" class="text-decoration-none"><span class="badge badge-light"><i
-                    class="fa fa-plus"></i></span> Todo</a>
+    <hr style="border: none; width: 0; height: 0;">
+    <div class="row"><br>
+        <div class="col-md-6 col-lg-6 col-sm-12 offset-md-2 offset-lg-2">
+            <a class="btn btn-primary btn-sm" href="/create" class="text-decoration-none"><span class="badge badge-light"><i
+                        class="fa fa-plus"></i></span> Todo</a>
+        </div>
     </div>
 </div>
 {% endblock %}
